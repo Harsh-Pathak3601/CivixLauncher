@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.civixshield.launcher">
+
+    <!-- ============================================================ -->
+    <!--  PERMISSIONS                                                 -->
+    <!-- ============================================================ -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_CALL_LOG" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <!-- Notification Listener is granted via System Settings → Notification Access -->
+
+    <queries>
+        <package android:name="com.civixshield.app" />
+    </queries>
+
+    <application
+        android:allowBackup="true"
+        android:label="CivixShield"
+        android:icon="@android:drawable/sym_def_app_icon"
+        android:roundIcon="@android:drawable/sym_def_app_icon"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.CivixLauncher"
+        android:usesCleartextTraffic="false">
+
+        <!-- ============================================================ -->
+        <!--  MAIN ACTIVITY — declared as the HOME screen                -->
+        <!-- ============================================================ -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:stateNotNeeded="true">
+
+            <!-- This makes the app appear as a launcher option -->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.HOME" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <!-- Handle civix://ingest deep links from React Native / PWA -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="civix" android:host="ingest" />
+            </intent-filter>
+        </activity>
+
+        <!-- ============================================================ -->
+        <!--  NOTIFICATION LISTENER SERVICE                              -->
+        <!-- ============================================================ -->
+        <service
+            android:name=".CivixNotificationListener"
+            android:exported="true"
+            android:label="CivixShield Threat Monitor"
+            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
+            <intent-filter>
+                <action android:name="android.service.notification.NotificationListenerService" />
+            </intent-filter>
+        </service>
+
+        <!-- ============================================================ -->
+        <!--  CALL SCREENING SERVICE                                     -->
+        <!-- ============================================================ -->
+        <service
+            android:name=".CivixCallScreeningService"
+            android:exported="true"
+            android:permission="android.permission.BIND_SCREENING_SERVICE">
+            <intent-filter>
+                <action android:name="android.telecom.CallScreeningService" />
+            </intent-filter>
+        </service>
+
+        <!-- ============================================================ -->
+        <!--  CALL MONITORING ACCESSIBILITY SERVICE                      -->
+        <!-- ============================================================ -->
+        <service
+            android:name=".CivixCallMonitorService"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService" />
+            </intent-filter>
+            <meta-data
+                android:name="android.accessibilityservice"
+                android:resource="@xml/accessibility_service_config" />
+        </service>
+
+    </application>
+</manifest>

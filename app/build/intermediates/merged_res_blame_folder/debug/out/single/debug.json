@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "com.civixshield.launcher.app-merged_res-58:/drawable_logo.png.flat",
+        "source": "com.civixshield.launcher.app-main-60:/drawable/logo.png"
+    },
+    {
+        "merged": "com.civixshield.launcher.app-merged_res-58:/xml_accessibility_service_config.xml.flat",
+        "source": "com.civixshield.launcher.app-main-60:/xml/accessibility_service_config.xml"
+    }
+]

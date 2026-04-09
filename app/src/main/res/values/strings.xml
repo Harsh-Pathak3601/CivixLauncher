@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">CivixShield</string>
+    <string name="accessibility_description">CivixShield Live Call Monitor detects scam patterns in real-time during active calls to protect you from Digital Arrest and fraud.</string>
+</resources>
