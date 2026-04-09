@@ -4,6 +4,13 @@ plugins {
     id 'com.google.gms.google-services'   // Firebase
 }
 
+// Load secrets from local.properties (gitignored — never committed)
+def localProperties = new Properties()
+def localPropertiesFile = rootProject.file('local.properties')
+if (localPropertiesFile.exists()) {
+    localPropertiesFile.withInputStream { localProperties.load(it) }
+}
+
 android {
     namespace     'com.civixshield.launcher'
     compileSdk    34
@@ -19,6 +26,9 @@ android {
         vectorDrawables {
             useSupportLibrary true
         }
+
+        // Inject secrets into BuildConfig
+        buildConfigField "String", "OPENROUTER_API_KEY", "\"${localProperties['OPENROUTER_API_KEY'] ?: ''}\""
     }
 
     buildTypes {
@@ -39,6 +49,7 @@ android {
 
     buildFeatures {
         compose true
+        buildConfig true   // required to expose BuildConfig fields
     }
 
     composeOptions {
