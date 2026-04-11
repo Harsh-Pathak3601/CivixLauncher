@@ -24,6 +24,14 @@ object CivixScamPatterns {
         "Enforcement Directorate", "Central Bureau"
     )
 
+    // ── Postal & Delivery Fraud Patterns ─────────────────────────────────────
+    // Smishing scams pretending to be India Post or courier services
+    private val POSTAL_FRAUD_PATTERNS = listOf(
+        "post office", "india post", "unable to deliver", "incorrect house number", 
+        "package to your door", "update your address", "delivery failed", "package pending",
+        "delivery suspended", "address update", "package status"
+    )
+
     // ── UPI / Banking Fraud Patterns ─────────────────────────────────────────
     // Fake UPI collect requests disguised as refunds or rewards
     private val UPI_FRAUD_PATTERNS = listOf(
@@ -64,7 +72,7 @@ object CivixScamPatterns {
         "bit.ly", "tinyurl", "t.me", "wa.me", "rebrand.ly", "cutt.ly", "is.gd",
         "-secure-", "-verify-", "-login-", "secure-sbi", "rbi-alert",
         "paytm-kyc", "verify-pan", "aadhaar-update", "government-india",
-        ".xyz", ".top", ".online", ".site", ".club", ".link", ".vip", ".today",
+        ".xyz", ".top", ".online", ".site", ".club", ".link", ".vip", ".today", ".cc",
         "http://1", "http://2", "https://1", "https://2", // Detecting IP-based links
         "sbi.in", "rbi.in", "hdfc.in", "icici.in", "axis.in", "paytm.in" // Fake official domains
     )
@@ -92,6 +100,7 @@ object CivixScamPatterns {
 
         // ── Rule 1: Authority/UPI/Digital Arrest Keywords ────────────────────
         INDIAN_AUTHORITY_KEYWORDS.forEach { if (lower.contains(it.lowercase())) score += 20 }
+        POSTAL_FRAUD_PATTERNS.forEach     { if (lower.contains(it.lowercase())) score += 20 }
         UPI_FRAUD_PATTERNS.forEach        { if (lower.contains(it.lowercase())) score += 15 }
         DIGITAL_ARREST_PHRASES.forEach    { if (lower.contains(it.lowercase())) score += 25 }
         URGENCY_AMPLIFIERS.forEach        { if (lower.contains(it.lowercase())) score += 10 }
@@ -149,10 +158,18 @@ object CivixScamPatterns {
         val matched = mutableListOf<String>()
 
         INDIAN_AUTHORITY_KEYWORDS.forEach { if (lower.contains(it.lowercase())) matched.add("Authority Impersonation: $it") }
+        POSTAL_FRAUD_PATTERNS.forEach     { if (lower.contains(it.lowercase())) matched.add("Postal/Delivery Fraud: $it") }
         UPI_FRAUD_PATTERNS.forEach        { if (lower.contains(it.lowercase())) matched.add("UPI/Banking Fraud: $it") }
         DIGITAL_ARREST_PHRASES.forEach    { if (lower.contains(it.lowercase())) matched.add("Digital Arrest Phrase: $it") }
         URGENCY_AMPLIFIERS.forEach        { if (lower.contains(it.lowercase())) matched.add("Urgency Amplifier: $it") }
         PHISHING_URL_PATTERNS.forEach     { if (lower.contains(it.lowercase())) matched.add("Phishing URL Pattern: $it") }
+        SOCIAL_ENGINEERING_PHRASES.forEach{ if (lower.contains(it.lowercase())) matched.add("Social Engineering: $it") }
+
+        val rawLinkRegex = "([a-zA-Z0-9-]+\\.[a-zA-Z]{2,6})".toRegex()
+        val foundRawLinks = rawLinkRegex.findAll(lower).map { it.value }.toList()
+        if (lower.contains("http://") || lower.contains("https://") || lower.contains("www.") || foundRawLinks.isNotEmpty()) {
+            matched.add("Suspicious Link Found")
+        }
 
         return matched
     }

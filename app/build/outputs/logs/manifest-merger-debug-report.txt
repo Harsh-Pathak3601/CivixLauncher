@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\patha\Downloads\civixShield-final\CivixLauncher\app\src\main\AndroidManifest.xml:2:1-99:12
-INJECTED from C:\Users\patha\Downloads\civixShield-final\CivixLauncher\app\src\main\AndroidManifest.xml:2:1-99:12
-INJECTED from C:\Users\patha\Downloads\civixShield-final\CivixLauncher\app\src\main\AndroidManifest.xml:2:1-99:12
-INJECTED from C:\Users\patha\Downloads\civixShield-final\CivixLauncher\app\src\main\AndroidManifest.xml:2:1-99:12
+ADDED from C:\Users\patha\Downloads\civixShield-final\CivixLauncher\app\src\main\AndroidManifest.xml:2:1-72:12
+INJECTED from C:\Users\patha\Downloads\civixShield-final\CivixLauncher\app\src\main\AndroidManifest.xml:2:1-72:12
+INJECTED from C:\Users\patha\Downloads\civixShield-final\CivixLauncher\app\src\main\AndroidManifest.xml:2:1-72:12
+INJECTED from C:\Users\patha\Downloads\civixShield-final\CivixLauncher\app\src\main\AndroidManifest.xml:2:1-72:12
 MERGED from [com.google.mlkit:entity-extraction:16.0.0-beta5] C:\Users\patha\.gradle\caches\transforms-3\a2595fc4df20bebd7b0c46e35180460e\transformed\jetified-entity-extraction-16.0.0-beta5\AndroidManifest.xml:2:1-20:12
 MERGED from [androidx.work:work-runtime:2.7.0] C:\Users\patha\.gradle\caches\transforms-3\2a3fc3aef6f7cdf3ac3b193bad9a55f4\transformed\work-runtime-2.7.0\AndroidManifest.xml:17:1-145:12
 MERGED from [com.google.mlkit:common:18.10.0] C:\Users\patha\.gradle\caches\transforms-3\1584f1571911bd92104c034a5ac41377\transformed\jetified-common-18.10.0\AndroidManifest.xml:2:1-26:12
@@ -158,8 +158,8 @@ ADDED from C:\Users\patha\Downloads\civixShield-final\CivixLauncher\app\src\main
 	android:name
 		ADDED from C:\Users\patha\Downloads\civixShield-final\CivixLauncher\app\src\main\AndroidManifest.xml:20:18-52
 application
-ADDED from C:\Users\patha\Downloads\civixShield-final\CivixLauncher\app\src\main\AndroidManifest.xml:23:5-98:19
-INJECTED from C:\Users\patha\Downloads\civixShield-final\CivixLauncher\app\src\main\AndroidManifest.xml:23:5-98:19
+ADDED from C:\Users\patha\Downloads\civixShield-final\CivixLauncher\app\src\main\AndroidManifest.xml:23:5-71:19
+INJECTED from C:\Users\patha\Downloads\civixShield-final\CivixLauncher\app\src\main\AndroidManifest.xml:23:5-71:19
 MERGED from [com.google.mlkit:entity-extraction:16.0.0-beta5] C:\Users\patha\.gradle\caches\transforms-3\a2595fc4df20bebd7b0c46e35180460e\transformed\jetified-entity-extraction-16.0.0-beta5\AndroidManifest.xml:10:5-18:19
 MERGED from [com.google.mlkit:entity-extraction:16.0.0-beta5] C:\Users\patha\.gradle\caches\transforms-3\a2595fc4df20bebd7b0c46e35180460e\transformed\jetified-entity-extraction-16.0.0-beta5\AndroidManifest.xml:10:5-18:19
 MERGED from [androidx.work:work-runtime:2.7.0] C:\Users\patha\.gradle\caches\transforms-3\2a3fc3aef6f7cdf3ac3b193bad9a55f4\transformed\work-runtime-2.7.0\AndroidManifest.xml:30:5-143:19
@@ -290,40 +290,6 @@ action#android.service.notification.NotificationListenerService
 ADDED from C:\Users\patha\Downloads\civixShield-final\CivixLauncher\app\src\main\AndroidManifest.xml:67:17-99
 	android:name
 		ADDED from C:\Users\patha\Downloads\civixShield-final\CivixLauncher\app\src\main\AndroidManifest.xml:67:25-96
-service#com.civixshield.launcher.CivixCallScreeningService
-ADDED from C:\Users\patha\Downloads\civixShield-final\CivixLauncher\app\src\main\AndroidManifest.xml:74:9-81:19
-	android:exported
-		ADDED from C:\Users\patha\Downloads\civixShield-final\CivixLauncher\app\src\main\AndroidManifest.xml:76:13-36
-	android:permission
-		ADDED from C:\Users\patha\Downloads\civixShield-final\CivixLauncher\app\src\main\AndroidManifest.xml:77:13-75
-	android:name
-		ADDED from C:\Users\patha\Downloads\civixShield-final\CivixLauncher\app\src\main\AndroidManifest.xml:75:13-54
-intent-filter#action:name:android.telecom.CallScreeningService
-ADDED from C:\Users\patha\Downloads\civixShield-final\CivixLauncher\app\src\main\AndroidManifest.xml:78:13-80:29
-action#android.telecom.CallScreeningService
-ADDED from C:\Users\patha\Downloads\civixShield-final\CivixLauncher\app\src\main\AndroidManifest.xml:79:17-79
-	android:name
-		ADDED from C:\Users\patha\Downloads\civixShield-final\CivixLauncher\app\src\main\AndroidManifest.xml:79:25-76
-service#com.civixshield.launcher.CivixCallMonitorService
-ADDED from C:\Users\patha\Downloads\civixShield-final\CivixLauncher\app\src\main\AndroidManifest.xml:86:9-96:19
-	android:exported
-		ADDED from C:\Users\patha\Downloads\civixShield-final\CivixLauncher\app\src\main\AndroidManifest.xml:89:13-37
-	android:permission
-		ADDED from C:\Users\patha\Downloads\civixShield-final\CivixLauncher\app\src\main\AndroidManifest.xml:88:13-79
-	android:name
-		ADDED from C:\Users\patha\Downloads\civixShield-final\CivixLauncher\app\src\main\AndroidManifest.xml:87:13-52
-intent-filter#action:name:android.accessibilityservice.AccessibilityService
-ADDED from C:\Users\patha\Downloads\civixShield-final\CivixLauncher\app\src\main\AndroidManifest.xml:90:13-92:29
-action#android.accessibilityservice.AccessibilityService
-ADDED from C:\Users\patha\Downloads\civixShield-final\CivixLauncher\app\src\main\AndroidManifest.xml:91:17-92
-	android:name
-		ADDED from C:\Users\patha\Downloads\civixShield-final\CivixLauncher\app\src\main\AndroidManifest.xml:91:25-89
-meta-data#android.accessibilityservice
-ADDED from C:\Users\patha\Downloads\civixShield-final\CivixLauncher\app\src\main\AndroidManifest.xml:93:13-95:72
-	android:resource
-		ADDED from C:\Users\patha\Downloads\civixShield-final\CivixLauncher\app\src\main\AndroidManifest.xml:95:17-69
-	android:name
-		ADDED from C:\Users\patha\Downloads\civixShield-final\CivixLauncher\app\src\main\AndroidManifest.xml:94:17-60
 uses-sdk
 INJECTED from C:\Users\patha\Downloads\civixShield-final\CivixLauncher\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\patha\Downloads\civixShield-final\CivixLauncher\app\src\main\AndroidManifest.xml

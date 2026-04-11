@@ -62,8 +62,6 @@ class MainActivity : ComponentActivity() {
             CivixLauncherTheme {
                 // Live reactive counters
                 val threatsBlocked = remember { mutableStateOf(prefs.getInt("threats_blocked", 0)) }
-                val callsScreened  = remember { mutableStateOf(prefs.getInt("calls_screened", 0)) }
-                val liveSeconds    = remember { mutableStateOf(prefs.getLong("live_call_duration", 0L)) }
                 
                 // Forensic Report Data
                 val lastText = remember { mutableStateOf(prefs.getString("last_report_text", "")) }
@@ -75,8 +73,6 @@ class MainActivity : ComponentActivity() {
                 LaunchedEffect(Unit) {
                     while(true) {
                         threatsBlocked.value = prefs.getInt("threats_blocked", 0)
-                        callsScreened.value  = prefs.getInt("calls_screened", 0)
-                        liveSeconds.value    = prefs.getLong("live_call_duration", 0L)
                         
                         lastText.value = prefs.getString("last_report_text", "")
                         lastScore.value = prefs.getInt("last_report_score", 0)
@@ -89,16 +85,12 @@ class MainActivity : ComponentActivity() {
 
                 LauncherDashboard(
                     threatsBlocked    = threatsBlocked.value,
-                    callsScreened     = callsScreened.value,
-                    liveSeconds       = liveSeconds.value,
                     lastText          = lastText.value ?: "",
                     lastScore         = lastScore.value,
                     lastLabel         = lastLabel.value ?: "N/A",
                     lastReasons       = lastReasons.value ?: "",
                     onOpenCivixApp    = { openCivixShieldApp() },
                     onRequestNotif    = { requestNotificationAccess() },
-                    onRequestCall     = { requestCallScreeningRole() },
-                    onRequestAccess   = { requestAccessibilityAccess() },
                     onFireTestAlert   = { fireTestNotification() }
                 )
             }
@@ -120,25 +112,7 @@ class MainActivity : ComponentActivity() {
         startActivity(Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS))
     }
 
-    private fun requestCallScreeningRole() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            val roleManager = getSystemService(Context.ROLE_SERVICE) as android.app.role.RoleManager
-            if (roleManager.isRoleAvailable(android.app.role.RoleManager.ROLE_CALL_SCREENING)) {
-                if (!roleManager.isRoleHeld(android.app.role.RoleManager.ROLE_CALL_SCREENING)) {
-                    val intent = roleManager.createRequestRoleIntent(android.app.role.RoleManager.ROLE_CALL_SCREENING)
-                    startActivityForResult(intent, 123)
-                } else {
-                    android.widget.Toast.makeText(this, "Call Screening already active", android.widget.Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
-    }
 
-    private fun requestAccessibilityAccess() {
-        val intent = Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)
-        startActivity(intent)
-        android.widget.Toast.makeText(this, "Enable 'CivixShield Live Call Monitor' in Accessibility Settings", android.widget.Toast.LENGTH_LONG).show()
-    }
 
     // ── Fires a test scam notification to verify the pipeline works ───────────
     private fun fireTestNotification() {
@@ -189,16 +163,12 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun LauncherDashboard(
     threatsBlocked: Int,
-    callsScreened: Int,
-    liveSeconds: Long,
     lastText: String,
     lastScore: Int,
     lastLabel: String,
     lastReasons: String,
     onOpenCivixApp: () -> Unit,
     onRequestNotif: () -> Unit,
-    onRequestCall: () -> Unit,
-    onRequestAccess: () -> Unit,
     onFireTestAlert: () -> Unit
 ) {
     val scrollState = rememberScrollState()
@@ -242,7 +212,7 @@ fun LauncherDashboard(
         Spacer(Modifier.height(32.dp))
 
         // ── Live Threat Counter ──────────────────────────────────────────────
-        LiveThreatCounter(threats = threatsBlocked, calls = callsScreened, seconds = liveSeconds)
+        LiveThreatCounter(threats = threatsBlocked)
 
         Spacer(Modifier.height(48.dp))
 
@@ -250,8 +220,6 @@ fun LauncherDashboard(
         Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
             CivixButton("OPEN CIVIXSHIELD",        CivixYellow, onClick = onOpenCivixApp)
             CivixButton("GRANT NOTIFICATION ACCESS", CivixCyan,   onClick = onRequestNotif)
-            CivixButton("ENABLE CALL SCREENING",    CivixCyan,   onClick = onRequestCall)
-            CivixButton("ENABLE LIVE CALL MONITOR", CivixCyan,   onClick = onRequestAccess)
             CivixButton("FIRE TEST ALERT",           CivixRed,    onClick = onFireTestAlert)
         }
 
@@ -274,7 +242,7 @@ fun LauncherDashboard(
 // ─── Live Threat Counter Widget (Unique Feature 2) ───────────────────────────
 
 @Composable
-fun LiveThreatCounter(threats: Int, calls: Int, seconds: Long) {
+fun LiveThreatCounter(threats: Int) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -285,35 +253,9 @@ fun LiveThreatCounter(threats: Int, calls: Int, seconds: Long) {
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceEvenly
+            horizontalArrangement = Arrangement.Center
         ) {
             CounterColumn("MESSAGES\nSCREENED", threats, CivixRed)
-            CounterColumn("CALLS\nSCREENED", calls,   CivixYellow)
-        }
-        
-        if (seconds > 0) {
-            Spacer(Modifier.height(16.dp))
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Box(
-                    modifier = Modifier
-                        .size(8.dp)
-                        .background(CivixGreen, shape = androidx.compose.foundation.shape.CircleShape)
-                )
-                Spacer(Modifier.width(8.dp))
-                Text(
-                    text = "REAL-TIME PROTECTION ACTIVE: ${seconds}s",
-                    color = CivixGreen,
-                    fontSize = 12.sp,
-                    fontWeight = FontWeight.Bold,
-                    fontFamily = FontFamily.Monospace
-                )
-            }
-            Text(
-                text = "Analyzing entire conversation context...",
-                color = Color.Gray,
-                fontSize = 10.sp,
-                fontFamily = FontFamily.Monospace
-            )
         }
     }
 }

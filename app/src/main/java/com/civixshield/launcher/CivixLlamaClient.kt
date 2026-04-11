@@ -15,8 +15,6 @@ import kotlinx.coroutines.withContext
  * low-cost scam classification of call transcripts and notifications.
  */
 object CivixLlamaClient {
-    // Key is injected at compile time from local.properties (gitignored).
-    // Never hardcode secrets directly in source code.
     private val OPENROUTER_API_KEY: String get() = BuildConfig.OPENROUTER_API_KEY
     private val client = OkHttpClient()
     private val gson = Gson()

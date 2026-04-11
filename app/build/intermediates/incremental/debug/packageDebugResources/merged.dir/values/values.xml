@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="accessibility_description">CivixShield Live Call Monitor detects scam patterns in real-time during active calls to protect you from Digital Arrest and fraud.</string>
+    <string name="app_name">CivixShield</string>
+    <string name="gcm_defaultSenderId" translatable="false">YOUR_PROJECT_NUMBER</string>
+    <string name="google_api_key" translatable="false">YOUR_ANDROID_API_KEY</string>
+    <string name="google_app_id" translatable="false">YOUR_ANDROID_APP_ID</string>
+    <string name="google_crash_reporting_api_key" translatable="false">YOUR_ANDROID_API_KEY</string>
+    <string name="google_storage_bucket" translatable="false">civixshield.appspot.com</string>
+    <string name="project_id" translatable="false">civixshield</string>
+    <style name="Theme.CivixLauncher" parent="android:Theme.Material.NoActionBar">
+        <item name="android:statusBarColor">#050505</item>
+        <item name="android:navigationBarColor">#050505</item>
+        <item name="android:windowBackground">#050505</item>
+    </style>
+</resources>

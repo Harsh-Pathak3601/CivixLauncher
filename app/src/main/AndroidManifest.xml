@@ -68,32 +68,5 @@
             </intent-filter>
         </service>
 
-        <!-- ============================================================ -->
-        <!--  CALL SCREENING SERVICE                                     -->
-        <!-- ============================================================ -->
-        <service
-            android:name=".CivixCallScreeningService"
-            android:exported="true"
-            android:permission="android.permission.BIND_SCREENING_SERVICE">
-            <intent-filter>
-                <action android:name="android.telecom.CallScreeningService" />
-            </intent-filter>
-        </service>
-
-        <!-- ============================================================ -->
-        <!--  CALL MONITORING ACCESSIBILITY SERVICE                      -->
-        <!-- ============================================================ -->
-        <service
-            android:name=".CivixCallMonitorService"
-            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="android.accessibilityservice.AccessibilityService" />
-            </intent-filter>
-            <meta-data
-                android:name="android.accessibilityservice"
-                android:resource="@xml/accessibility_service_config" />
-        </service>
-
     </application>
 </manifest>
