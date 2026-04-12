@@ -1,8 +1,8 @@
 # CivixLauncher 🚀
 
-**CivixLauncher** is the persistent background sentinel of the CivixShield ecosystem. Built as a native Android utility app, it provides 24/7 real-time monitoring of notifications and clipboard activity to intercept scam threats before they reach the user. 
+**CivixLauncher** is the persistent background Protection Engine of the CivixShield ecosystem. Built as a native Android utility app, it provides 24/7 real-time monitoring of notifications and clipboard activity to intercept scam threats before they reach the user. 
 
-*Recent Optimization:* To achieve an ultra-low battery drainage profile (~0% active CPU cycle cost), we have securely stripped out older generic call-screening frameworks. The Launcher now utilizes a pure **Event-Driven Architecture** that remains completely dormant until a specific OS-level hardware interrupt occurs.
+
 
 ## 🛡️ Key Features
 
@@ -13,7 +13,7 @@ Listens for incoming messages across all major communication and payment platfor
 - **Email:** Gmail, Outlook.
 - **Logic:** Extracts content and automatically scans for India-specific scam patterns (Digital Arrest, KYC scams, fake urgent payments).
 
-### 2. Clipboard Sentinel
+### 2. Clipboard Monitoring 
 Continuously monitors the system clipboard via OS intents. If a user natively copies a link or text block that contains known scam signatures or malicious URLs, the Launcher intercepts it and securely notifies the main CivixShield app for deep AI forensics.
 
 ### 3. Deep Link Integration
